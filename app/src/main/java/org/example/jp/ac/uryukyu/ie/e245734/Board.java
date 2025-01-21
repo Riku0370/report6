@@ -1,4 +1,4 @@
-package org.example;
+package org.example.jp.ac.uryukyu.ie.e245734;
 
 public class Board {
     private String black = "⚫️";
@@ -11,6 +11,9 @@ public class Board {
         resetting();
     }
 
+    public String[][] getStage(){
+        return stage;
+    }
     public String getBlack() {
         return black;
     }

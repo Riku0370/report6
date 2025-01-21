@@ -1,4 +1,4 @@
-package org.example;
+package org.example.jp.ac.uryukyu.ie.e245734;
 
 import java.util.Scanner;
 import java.util.Random;
@@ -6,11 +6,17 @@ public class Game {
     private Board board;
     private String playerStone;  // 現在のプレイヤー（'⚫️' = 黒, '○' = 白）
     private boolean gameOver;
+
+    public String getPlayerStone() {
+        return playerStone;
+    }
+
     public Game() {
         board = new Board();
         playerStone = board.getBlack();  // 初めは黒からスタート
         gameOver = false;
     }
+
     // ゲームの進行
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
@@ -39,7 +45,7 @@ public class Game {
                 }
             }
             board.display();
-            if (board.isGameover()) {
+            if (board.gameOver()) {
                 gameOver = true;
                 board.winner();
             } else {
@@ -48,8 +54,9 @@ public class Game {
         }
         scanner.close();
     }
+    
     // プレイヤーのターンを切り替え
-    private void switchTurn() {
+    public void switchTurn() {
         if (playerStone.equals("⚫️")) {
             playerStone = "○";  // 次は白（AIのターン）
         } else {
