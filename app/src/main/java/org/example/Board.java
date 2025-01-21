@@ -7,24 +7,20 @@ public class Board {
     private String[][] stage = new String[8][8];
     private final int size = 8;
 
-    public int getSize(){
-        return size;
-    }
-
     public Board() {
         resetting();
     }
 
-    public String getBlack(){
+    public String getBlack() {
         return black;
     }
 
-    public String getWhite(){
+    public String getWhite() {
         return white;
     }
 
-    public String getBlank(){
-        return blank;
+    public int getSize() {
+        return size;
     }
 
     // 盤面の初期化
@@ -34,6 +30,7 @@ public class Board {
                 stage[i][k] = blank;
             }
         }
+        // 初期配置
         stage[3][3] = black;
         stage[3][4] = white;
         stage[4][3] = white;
@@ -56,7 +53,7 @@ public class Board {
             System.out.println("無効な座標です！");
             return false;
         }
-        if (stage[row][col] != blank) {
+        if (!stage[row][col].equals(blank)) {
             System.out.println("この場所には石を置けません！");
             return false;
         }
@@ -64,11 +61,11 @@ public class Board {
         return true;
     }
 
-    // 駒を置けるかの判定
+    // 盤面に置ける場所があるか
     public boolean hantei() {
         for (int i = 0; i < size; i++) {
             for (int k = 0; k < size; k++) {
-                if (stage[i][k] == blank) {  // 空いている場所があれば、置ける場所がある
+                if (stage[i][k].equals(blank)) {  // 空いている場所があれば、置ける場所がある
                     return true;
                 }
             }
@@ -77,7 +74,7 @@ public class Board {
     }
 
     // 勝利したチーム
-    public void winner() {  
+    public void winner() {
         int blackCount = 0;
         int whiteCount = 0;
         for (int i = 0; i < size; i++) {
@@ -90,21 +87,27 @@ public class Board {
                 }
             }
         }
-        System.out.println("盤面の黒の数は" + blackCount + "、盤面の白の数は" + whiteCount);
-        if (whiteCount > blackCount) {
-            System.out.println("勝者は白！");
-        } else if (blackCount > whiteCount) {
+
+        System.out.println("黒の数: " + blackCount + " 白の数: " + whiteCount);
+        if (blackCount > whiteCount) {
             System.out.println("勝者は黒！");
+        } else if (whiteCount > blackCount) {
+            System.out.println("勝者は白！");
         } else {
-            System.out.println("両者引き分け");
+            System.out.println("引き分け！");
         }
     }
 
+    // 新しいゲームの設定
+    public void resetBoard() {
+        resetting();
+    }
+
     // ゲームの終了判定
-    public boolean isGameover() {
+    public boolean gameOver() {
         for (int i = 0; i < size; i++) {
             for (int k = 0; k < size; k++) {
-                if (stage[i][k] == blank) {
+                if (stage[i][k].equals(blank)) {
                     return false;
                 }
             }

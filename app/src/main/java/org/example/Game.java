@@ -2,29 +2,22 @@ package org.example;
 
 import java.util.Scanner;
 import java.util.Random;
-
-
 public class Game {
     private Board board;
     private String playerStone;  // 現在のプレイヤー（'⚫️' = 黒, '○' = 白）
     private boolean gameOver;
-
     public Game() {
         board = new Board();
         playerStone = board.getBlack();  // 初めは黒からスタート
         gameOver = false;
     }
-
     // ゲームの進行
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
-
         while (!gameOver) {
             System.out.println("現在のプレイヤーは" + playerStone + "です");
             board.display();
-
             int row, col;
-
             // プレイヤーがランダムで手を打つ場合
             if (playerStone.equals("○")) {
                 // AI（白のプレイヤー）のランダムプレイ
@@ -45,9 +38,7 @@ public class Game {
                     continue;  // 無効な場所なら次のループへ
                 }
             }
-
             board.display();
-
             if (board.isGameover()) {
                 gameOver = true;
                 board.winner();
@@ -57,7 +48,6 @@ public class Game {
         }
         scanner.close();
     }
-
     // プレイヤーのターンを切り替え
     private void switchTurn() {
         if (playerStone.equals("⚫️")) {
